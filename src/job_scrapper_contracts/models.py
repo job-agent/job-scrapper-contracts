@@ -117,20 +117,22 @@ class Job:
         }
 
         if self.salary:
-            result['salary'] = {
+            salary_dict: SalaryDict = {
                 'currency': self.salary.currency,
                 'min_value': self.salary.min_value,
                 'max_value': self.salary.max_value,
             }
+            result['salary'] = salary_dict
 
         if self.location:
-            result['location'] = {
+            location_dict: LocationDict = {
                 'country': self.location.country,
                 'locality': self.location.locality,
                 'region': self.location.region,
                 'postal_code': self.location.postal_code,
                 'is_remote': self.location.is_remote,
             }
+            result['location'] = location_dict
 
         if self.experience_months is not None:
             result['experience_months'] = self.experience_months
