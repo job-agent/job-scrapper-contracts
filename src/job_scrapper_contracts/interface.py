@@ -1,7 +1,5 @@
 """
-Abstract interface for job scrapper services
-
-This interface defines the contract that all job scrapper implementations must follow.
+Core interfaces for the scrapper service architecture
 """
 
 from abc import ABC, abstractmethod
@@ -10,12 +8,12 @@ from typing import List
 from .models import Job, JobDict
 
 
-class JobScrapperInterface(ABC):
+class ScrapperServiceInterface(ABC):
     """
-    Abstract base class for job scrapping services.
+    Protocol defining the interface for job scrapper service implementations.
 
-    All job scrapper implementations (Djinni, LinkedIn, etc.) should implement this interface
-    to ensure consistent behavior across different scrapping sources.
+    This interface ensures that any scrapper service provides a consistent API
+    for scraping jobs and returning them in various formats.
     """
 
     @abstractmethod
@@ -27,7 +25,7 @@ class JobScrapperInterface(ABC):
         timeout: int = 30
     ) -> List[Job]:
         """
-        Scrape jobs and return Job objects.
+        Scrape jobs from configured sources.
 
         Args:
             salary: Minimum salary filter (default: 4000)
@@ -37,9 +35,6 @@ class JobScrapperInterface(ABC):
 
         Returns:
             List of Job objects
-
-        Raises:
-            Exception: Implementation-specific exceptions for request/parsing failures
         """
         pass
 
@@ -52,7 +47,7 @@ class JobScrapperInterface(ABC):
         timeout: int = 30
     ) -> List[JobDict]:
         """
-        Scrape jobs and return as dictionaries instead of Job objects.
+        Scrape jobs and return as dictionaries.
 
         Args:
             salary: Minimum salary filter (default: 4000)
@@ -61,9 +56,6 @@ class JobScrapperInterface(ABC):
             timeout: Request timeout in seconds (default: 30)
 
         Returns:
-            List of dictionaries containing job data
-
-        Raises:
-            Exception: Implementation-specific exceptions for request/parsing failures
+            List of job dictionaries
         """
         pass
