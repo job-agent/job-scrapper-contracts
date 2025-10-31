@@ -42,7 +42,6 @@ class JobDict(TypedDict, total=False):
     date_posted: str  # ISO format datetime string
     valid_through: str  # ISO format datetime string
     employment_type: str
-    direct_apply: bool
     # Optional fields
     salary: SalaryDict
     experience_months: float
