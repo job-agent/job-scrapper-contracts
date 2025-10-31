@@ -112,7 +112,6 @@ class Job:
             'date_posted': self.date_posted.isoformat(),
             'valid_through': self.valid_through.isoformat(),
             'employment_type': self.employment_type,
-            'direct_apply': self.direct_apply,
         }
 
         if self.salary:
