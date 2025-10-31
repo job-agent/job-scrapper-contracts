@@ -15,7 +15,7 @@ from .models import (
     SalaryDict,
     LocationDict,
 )
-from .interface import JobScrapperInterface
+from .interface import ScrapperServiceInterface
 
 __version__ = "0.1.0"
 
@@ -31,5 +31,5 @@ __all__ = [
     "SalaryDict",
     "LocationDict",
     # Interface
-    "JobScrapperInterface",
+    "ScrapperServiceInterface",
 ]
