@@ -24,11 +24,9 @@ class CompanyDict(TypedDict):
 
 class LocationDict(TypedDict):
     """Location information dictionary"""
-    country: Optional[str]
-    locality: Optional[List[str]]
     region: Optional[str]
-    postal_code: Optional[str]
     is_remote: bool
+    can_apply: Optional[bool]
 
 
 class JobDict(TypedDict, total=False):
@@ -66,12 +64,18 @@ class Company:
 
 @dataclass
 class Location:
-    """Job location information"""
-    country: Optional[str] = None
-    locality: Optional[List[str]] = None
+    """Job location information
+
+    Attributes:
+        region: Geographic region or country for the job
+        can_apply: Indicates whether the user can apply for this job based on location.
+            - True: User can apply (bi-check2-circle or bi-question-circle icon)
+            - False: User cannot apply (bi-x-circle icon)
+            - None: Status unknown or not available
+    """
     region: Optional[str] = None
-    postal_code: Optional[str] = None
     is_remote: bool = False
+    can_apply: Optional[bool] = None
 
 
 @dataclass
@@ -124,11 +128,9 @@ class Job:
 
         if self.location:
             location_dict: LocationDict = {
-                'country': self.location.country,
-                'locality': self.location.locality,
                 'region': self.location.region,
-                'postal_code': self.location.postal_code,
                 'is_remote': self.location.is_remote,
+                'can_apply': self.location.can_apply,
             }
             result['location'] = location_dict
 
