@@ -23,7 +23,7 @@ class ScrapperServiceInterface(ABC):
         salary: int = 4000,
         employment: str = "remote",
         posted_after: Optional[datetime] = None,
-        timeout: int = 30
+        timeout: int = 30,
     ) -> List[Job]:
         """
         Scrape jobs from configured sources.
@@ -47,7 +47,7 @@ class ScrapperServiceInterface(ABC):
         salary: int = 4000,
         employment: str = "remote",
         posted_after: Optional[datetime] = None,
-        timeout: int = 30
+        timeout: int = 30,
     ) -> List[JobDict]:
         """
         Scrape jobs and return as dictionaries.
