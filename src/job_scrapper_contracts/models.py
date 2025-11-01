@@ -5,7 +5,7 @@ These models define the contract between scrapper services and consumers.
 """
 
 from dataclasses import dataclass
-from typing import Optional, List, TypedDict
+from typing import Optional, TypedDict
 from datetime import datetime
 
 

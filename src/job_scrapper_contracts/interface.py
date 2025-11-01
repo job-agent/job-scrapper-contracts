@@ -3,7 +3,8 @@ Core interfaces for the scrapper service architecture
 """
 
 from abc import ABC, abstractmethod
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 
 from .models import Job, JobDict
 
@@ -21,16 +22,18 @@ class ScrapperServiceInterface(ABC):
         self,
         salary: int = 4000,
         employment: str = "remote",
-        page: int = 1,
+        posted_after: Optional[datetime] = None,
         timeout: int = 30
     ) -> List[Job]:
         """
         Scrape jobs from configured sources.
 
+        Automatically paginates through all pages until reaching the date cutoff.
+
         Args:
             salary: Minimum salary filter (default: 4000)
             employment: Employment type filter (default: "remote")
-            page: Page number for pagination (default: 1)
+            posted_after: Only return jobs posted after this datetime (default: None, returns all jobs)
             timeout: Request timeout in seconds (default: 30)
 
         Returns:
@@ -43,16 +46,18 @@ class ScrapperServiceInterface(ABC):
         self,
         salary: int = 4000,
         employment: str = "remote",
-        page: int = 1,
+        posted_after: Optional[datetime] = None,
         timeout: int = 30
     ) -> List[JobDict]:
         """
         Scrape jobs and return as dictionaries.
 
+        Automatically paginates through all pages until reaching the date cutoff.
+
         Args:
             salary: Minimum salary filter (default: 4000)
             employment: Employment type filter (default: "remote")
-            page: Page number for pagination (default: 1)
+            posted_after: Only return jobs posted after this datetime (default: None, returns all jobs)
             timeout: Request timeout in seconds (default: 30)
 
         Returns:
