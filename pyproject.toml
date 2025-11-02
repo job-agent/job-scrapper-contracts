@@ -7,7 +7,7 @@ name = "job-scrapper-contracts"
 version = "0.1.0"
 description = "Contract definitions for job scrapper services"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [
     {name = "EvilMangos", email = "maksymkhamets.career@gmail.com"}
 ]
