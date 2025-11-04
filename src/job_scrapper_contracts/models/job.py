@@ -1,35 +1,10 @@
-"""
-Data models for job listings - Contract definitions
-
-These models define the contract between scrapper services and consumers.
-"""
-
 from dataclasses import dataclass
-from typing import Optional, TypedDict
 from datetime import datetime
+from typing import Optional, TypedDict
 
-
-class SalaryDict(TypedDict):
-    """Salary information dictionary"""
-
-    currency: str
-    min_value: Optional[float]
-    max_value: Optional[float]
-
-
-class CompanyDict(TypedDict):
-    """Company information dictionary"""
-
-    name: str
-    website: Optional[str]
-
-
-class LocationDict(TypedDict):
-    """Location information dictionary"""
-
-    region: Optional[str]
-    is_remote: bool
-    can_apply: Optional[bool]
+from .company import Company, CompanyDict
+from .location import Location, LocationDict
+from .salary import Salary, SalaryDict
 
 
 class JobDict(TypedDict, total=False):
@@ -41,48 +16,13 @@ class JobDict(TypedDict, total=False):
     description: str
     company: CompanyDict
     category: str
-    date_posted: str  # ISO format datetime string
-    valid_through: str  # ISO format datetime string
+    date_posted: str
+    valid_through: str
     employment_type: str
-    # Optional fields
     salary: SalaryDict
     experience_months: float
     location: LocationDict
     industry: str
-
-
-@dataclass
-class Salary:
-    """Salary information for a job"""
-
-    currency: str
-    min_value: Optional[float] = None
-    max_value: Optional[float] = None
-
-
-@dataclass
-class Company:
-    """Company/organization information"""
-
-    name: str
-    website: Optional[str] = None
-
-
-@dataclass
-class Location:
-    """Job location information
-
-    Attributes:
-        region: Geographic region or country for the job
-        can_apply: Indicates whether the user can apply for this job based on location.
-            - True: User can apply (bi-check2-circle or bi-question-circle icon)
-            - False: User cannot apply (bi-x-circle icon)
-            - None: Status unknown or not available
-    """
-
-    region: Optional[str] = None
-    is_remote: bool = False
-    can_apply: Optional[bool] = None
 
 
 @dataclass
@@ -98,19 +38,18 @@ class Job:
     date_posted: datetime
     valid_through: datetime
     employment_type: str
-
-    # Optional fields
     salary: Optional[Salary] = None
     experience_months: Optional[float] = None
     location: Optional[Location] = None
     industry: Optional[str] = None
     direct_apply: bool = True
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Job(id={self.job_id}, title='{self.title}', company='{self.company.name}')"
 
     def to_dict(self) -> JobDict:
         """Convert job to dictionary"""
+
         result: JobDict = {
             "job_id": self.job_id,
             "title": self.title,
