@@ -16,6 +16,7 @@ from .models import (
     LocationDict,
 )
 from .interface import ScrapperServiceInterface
+from .messages import ScrapeJobsRequest, ScrapeJobsResponse
 
 __version__ = "0.1.0"
 
@@ -32,4 +33,7 @@ __all__ = [
     "LocationDict",
     # Interface
     "ScrapperServiceInterface",
+    # Messages
+    "ScrapeJobsRequest",
+    "ScrapeJobsResponse",
 ]
