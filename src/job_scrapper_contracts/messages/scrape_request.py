@@ -11,9 +11,11 @@ class ScrapeJobsRequest(TypedDict, total=False):
         employment: Employment type (e.g., "remote", "full-time", "part-time")
         posted_after: Only include jobs posted after this date (ISO format string)
         timeout: Request timeout in seconds
+        batch_size: Optional batch size for streaming callbacks
     """
 
     salary: int
     employment: str
     posted_after: Optional[str]
     timeout: int
+    batch_size: int
