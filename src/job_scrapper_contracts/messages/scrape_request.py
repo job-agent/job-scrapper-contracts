@@ -1,21 +1,19 @@
 """Message contract for scrape jobs request."""
 
-from typing import Optional, TypedDict
+from typing import TypedDict
+
+from job_scrapper_contracts.messages.scrape_filter import ScrapeJobsFilter
 
 
 class ScrapeJobsRequest(TypedDict, total=False):
     """Request message for scraping jobs.
 
     Attributes:
-        salary: Minimum salary requirement
-        employment: Employment type (e.g., "remote", "full-time", "part-time")
-        posted_after: Only include jobs posted after this date (ISO format string)
+        filter: Filtering options for the request
         timeout: Request timeout in seconds
         batch_size: Optional batch size for streaming callbacks
     """
 
-    salary: int
-    employment: str
-    posted_after: Optional[str]
+    filter: ScrapeJobsFilter
     timeout: int
     batch_size: int

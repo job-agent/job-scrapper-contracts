@@ -18,8 +18,8 @@ class ScrapperServiceInterface(ABC):
     @abstractmethod
     def scrape_jobs(
         self,
-        salary: int,
-        employment: str,
+        min_salary: Optional[int],
+        employment_location: Optional[str],
         posted_after: Optional[datetime],
         timeout: int,
         batch_size: int,
@@ -30,8 +30,8 @@ class ScrapperServiceInterface(ABC):
         the pagination limit or posting date cutoff is reached.
 
         Args:
-            salary: Minimum salary threshold applied to each listing.
-            employment: Employment type filter such as "remote" or "full-time".
+            min_salary: Minimum salary threshold applied to each listing.
+            employment_location: Employment type or location filter.
             posted_after: Omit listings published before this timestamp; use None to include all.
             timeout: Request timeout in seconds for each provider interaction.
             batch_size: Maximum number of jobs fetched per pagination request.
