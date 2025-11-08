@@ -13,9 +13,8 @@ class ScrapeJobsResponse(TypedDict, total=False):
         success: Whether the scraping operation was successful
         error: Error message if the operation failed
         jobs_count: Number of jobs scraped
-        is_complete: Whether this is the final response (True) or a page result (False)
-        page_number: The page number for this batch of jobs (for page responses)
-        total_jobs: Total number of jobs scraped across all pages (only in final response)
+        is_complete: Whether this is the final response (True) or a batch result (False)
+        total_jobs: Total number of jobs scraped across all batches (only in final response)
     """
 
     jobs: List[JobDict]
@@ -23,5 +22,4 @@ class ScrapeJobsResponse(TypedDict, total=False):
     error: Optional[str]
     jobs_count: int
     is_complete: bool
-    page_number: Optional[int]
     total_jobs: Optional[int]
