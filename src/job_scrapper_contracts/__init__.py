@@ -16,7 +16,8 @@ from .models import (
     LocationDict,
 )
 from .interface import ScrapperServiceInterface
-from .messages import ScrapeJobsFilter, ScrapeJobsRequest, ScrapeJobsResponse
+from .scrape_filter import ScrapeJobsFilter
+from .messages import ScrapeJobsRequest, ScrapeJobsResponse
 
 __version__ = "0.1.0"
 
