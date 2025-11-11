@@ -2,7 +2,7 @@
 
 from typing import TypedDict
 
-from job_scrapper_contracts.messages.scrape_filter import ScrapeJobsFilter
+from job_scrapper_contracts.scrape_filter import ScrapeJobsFilter
 
 
 class ScrapeJobsRequest(TypedDict, total=False):
