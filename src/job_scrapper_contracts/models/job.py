@@ -23,6 +23,7 @@ class JobDict(TypedDict, total=False):
     experience_months: float
     location: LocationDict
     industry: str
+    source: str
 
 
 @dataclass
@@ -42,6 +43,7 @@ class Job:
     experience_months: Optional[float] = None
     location: Optional[Location] = None
     industry: Optional[str] = None
+    source: Optional[str] = None  # Job board source (e.g., 'djinni', 'linkedin')
     direct_apply: bool = True
 
     def __str__(self) -> str:
@@ -83,5 +85,8 @@ class Job:
 
         if self.industry:
             result["industry"] = self.industry
+
+        if self.source:
+            result["source"] = self.source
 
         return result
