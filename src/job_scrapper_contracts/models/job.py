@@ -18,6 +18,8 @@ class JobDictRequired(TypedDict):
     date_posted: str
     valid_through: str
     employment_type: str
+    source: str
+
 
 
 class JobDict(JobDictRequired, total=False):
@@ -28,7 +30,6 @@ class JobDict(JobDictRequired, total=False):
     experience_months: float
     location: LocationDict
     industry: str
-    source: str
 
 
 @dataclass
@@ -40,15 +41,15 @@ class Job:
     url: str
     description: str
     company: Company
-    category: Optional[str]
     date_posted: datetime
     valid_through: datetime
     employment_type: str
+    source: str
+    category: Optional[str] = None
     salary: Optional[Salary] = None
     experience_months: Optional[float] = None
     location: Optional[Location] = None
     industry: Optional[str] = None
-    source: str = None  # Job board source (e.g., 'djinni', 'linkedin')
 
     def __str__(self) -> str:
         return f"Job(id={self.job_id}, title='{self.title}', company='{self.company.name}')"
