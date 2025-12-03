@@ -43,7 +43,6 @@ job = Job(
     date_posted=datetime.now(),
     valid_through=datetime(2025, 12, 31),
     employment_type="FULL_TIME",
-    direct_apply=True,
     salary=Salary(
         currency="USD",
         min_value=100000,
@@ -66,11 +65,15 @@ print(job)  # Job(id=12345, title='Senior Python Developer', company='Tech Corp'
 
 ### Working with TypedDict
 
+`JobDict` uses TypedDict inheritance to enforce required and optional fields:
+- **JobDictRequired**: Contains required fields that must always be present
+- **JobDict**: Extends JobDictRequired and adds optional fields
+
 ```python
 from job_scrapper_contracts.models import JobDict, CompanyDict, LocationDict, SalaryDict
 
-# Use TypedDict for data validation and serialization
-job_data: JobDict = {
+# Minimal JobDict with only required fields
+minimal_job: JobDict = {
     'job_id': 12345,
     'title': 'Senior Python Developer',
     'url': 'https://example.com/jobs/12345',
@@ -79,11 +82,26 @@ job_data: JobDict = {
         'name': 'Tech Corp',
         'website': 'https://techcorp.com'
     },
-    'category': 'Software Development',
+    'date_posted': '2025-01-15T10:00:00',
+    'valid_through': '2025-12-31T23:59:59',
+    'employment_type': 'FULL_TIME'
+}
+
+# Full JobDict with optional fields included
+full_job: JobDict = {
+    'job_id': 12345,
+    'title': 'Senior Python Developer',
+    'url': 'https://example.com/jobs/12345',
+    'description': 'Job description...',
+    'company': {
+        'name': 'Tech Corp',
+        'website': 'https://techcorp.com'
+    },
     'date_posted': '2025-01-15T10:00:00',
     'valid_through': '2025-12-31T23:59:59',
     'employment_type': 'FULL_TIME',
-    'direct_apply': True,
+    # Optional fields below
+    'category': 'Software Development',
     'salary': {
         'currency': 'USD',
         'min_value': 100000,
@@ -95,7 +113,10 @@ job_data: JobDict = {
         'region': 'CA',
         'postal_code': None,
         'is_remote': True
-    }
+    },
+    'experience_months': 36.0,
+    'industry': 'Technology',
+    'source': 'linkedin'
 }
 ```
 
@@ -111,17 +132,17 @@ The main job listing model with the following fields:
 - `url` (str): URL to the job posting
 - `description` (str): Full job description
 - `company` (Company): Company information
-- `category` (str): Job category
 - `date_posted` (datetime): When the job was posted
 - `valid_through` (datetime): Job posting expiration date
 - `employment_type` (str): Type of employment (e.g., FULL_TIME, PART_TIME, CONTRACT)
 
 **Optional fields:**
+- `category` (str): Job category
 - `salary` (Salary): Salary information
 - `experience_months` (float): Required experience in months
 - `location` (Location): Job location details
 - `industry` (str): Industry sector
-- `direct_apply` (bool): Whether direct application is available (defaults to True)
+- `source` (str): Job board source (e.g., 'djinni', 'linkedin')
 
 ### Company
 

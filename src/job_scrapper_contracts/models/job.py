@@ -7,18 +7,23 @@ from .location import Location, LocationDict
 from .salary import Salary, SalaryDict
 
 
-class JobDict(TypedDict, total=False):
-    """Job listing dictionary structure"""
+class JobDictRequired(TypedDict):
+    """Required fields for job listing dictionary"""
 
     job_id: int
     title: str
     url: str
     description: str
     company: CompanyDict
-    category: str
     date_posted: str
     valid_through: str
     employment_type: str
+
+
+class JobDict(JobDictRequired, total=False):
+    """Job listing dictionary structure with optional fields"""
+
+    category: str
     salary: SalaryDict
     experience_months: float
     location: LocationDict
@@ -35,7 +40,7 @@ class Job:
     url: str
     description: str
     company: Company
-    category: str
+    category: Optional[str]
     date_posted: datetime
     valid_through: datetime
     employment_type: str
@@ -43,8 +48,7 @@ class Job:
     experience_months: Optional[float] = None
     location: Optional[Location] = None
     industry: Optional[str] = None
-    source: Optional[str] = None  # Job board source (e.g., 'djinni', 'linkedin')
-    direct_apply: bool = True
+    source: str = None  # Job board source (e.g., 'djinni', 'linkedin')
 
     def __str__(self) -> str:
         return f"Job(id={self.job_id}, title='{self.title}', company='{self.company.name}')"
