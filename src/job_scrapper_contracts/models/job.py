@@ -21,7 +21,6 @@ class JobDictRequired(TypedDict):
     source: str
 
 
-
 class JobDict(JobDictRequired, total=False):
     """Job listing dictionary structure with optional fields"""
 
