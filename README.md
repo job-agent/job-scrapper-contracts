@@ -181,13 +181,12 @@ pip install -e .[dev]
 ### Code Quality
 
 The project uses the following tools:
-- **black**: Code formatting (line length: 100)
-- **ruff**: Linting
+- **ruff**: Linting and formatting (line length: 100)
 - **mypy**: Type checking
 
 Run formatting:
 ```bash
-black src/
+ruff format src/
 ```
 
 Run linting:
@@ -211,7 +210,7 @@ MIT License - see LICENSE file for details
 ## Contributing
 
 Contributions are welcome! Please ensure that:
-1. Code is formatted with black
+1. Code is formatted with ruff
 2. Type hints are provided for all functions
 3. All mypy checks pass
 4. Code follows the existing style and conventions
